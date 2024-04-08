@@ -48,3 +48,15 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
 #pragma endregion
+
+#pragma region PhysicalDevices and FamilyQueue
+
+VkPhysicalDevice PickPhysicalDevice(VkInstance& instance);
+bool isDeviceSuitable(VkPhysicalDevice device);
+
+#pragma endregion
+
+#pragma region LogicalDevices and Queue
+void CreateLogicalDevice(VkPhysicalDevice& physicalDevice, VkDevice* device, VkQueue* graphicsQueue);
+
+#pragma endregion

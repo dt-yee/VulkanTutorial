@@ -11,6 +11,28 @@ struct QueueFamilyIndices
     }
 };
 
+static QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device)
+{
+    //get all available queue family on the physical device
+    uint32_t queueFamilyCount = 0;
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+    std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+    QueueFamilyIndices indices;
+
+    int index = 0;
+    for (const auto& queueFamily : queueFamilies)//find queuefamily that support vk_queue_graphics_bit
+    {
+        if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+        {
+            indices.graphicsFamily = index;
+            break;
+        }
+        ++index;
+    }
+    return indices;
+}
 
 class VK_DebugAndValidationLayer
 {
@@ -30,3 +52,5 @@ private:
 
     bool enableValidationLayers = false;
 };
+
+

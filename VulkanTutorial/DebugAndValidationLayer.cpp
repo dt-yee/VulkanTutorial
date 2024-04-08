@@ -100,7 +100,7 @@ void VK_DebugAndValidationLayer::EnableValidationLayer(std::vector<const char*>&
         createInfo.enabledLayerCount = 0;
     }
 
-    if (!enableValidationLayers || windows == nullptr || instance == nullptr)
+    if (!enableValidationLayers || windows == nullptr || instance == VK_NULL_HANDLE)
     {
         return;
     }

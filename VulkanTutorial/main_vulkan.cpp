@@ -26,6 +26,9 @@ private:
     void initVulkan()
     {
         createInstance();
+
+        physicalDevice = PickPhysicalDevice(instance);
+        CreateLogicalDevice(physicalDevice, &logicalDevice, &graphicQueue);
     }
 
     void mainLoop()
@@ -125,11 +128,14 @@ private:
     }
 
     GLFWwindow* windows = nullptr;
-    VkInstance instance = nullptr;
+    VkInstance instance = VK_NULL_HANDLE;
 
     bool m_bEnableDebug = false;
     VK_DebugAndValidationLayer *DebugValidationLayer = nullptr;
 
+    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+    VkDevice logicalDevice = VK_NULL_HANDLE;
+    VkQueue graphicQueue = VK_NULL_HANDLE;
 };
 
 int main()
