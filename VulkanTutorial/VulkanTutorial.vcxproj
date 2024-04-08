@@ -148,8 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="01Instance_creation.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="DebugAndValidationLayer.cpp" />
+    <ClCompile Include="main_test.cpp" />
+    <ClCompile Include="main_vulkan.cpp" />
     <ClCompile Include="PhysicalDevice&amp;Queue.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommonHead.h" />
+    <ClInclude Include="Structs.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
