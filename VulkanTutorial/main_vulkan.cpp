@@ -27,6 +27,7 @@ private:
     {
         createInstance();
 
+        CreateSurface(instance, windows, &surface);
         physicalDevice = PickPhysicalDevice(instance);
         CreateLogicalDevice(physicalDevice, &logicalDevice, &graphicQueue);
     }
@@ -135,7 +136,11 @@ private:
 
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkDevice logicalDevice = VK_NULL_HANDLE;
+
     VkQueue graphicQueue = VK_NULL_HANDLE;
+    VkQueue presentQueue = VK_NULL_HANDLE;
+
+    VkSurfaceKHR surface = VK_NULL_HANDLE;
 };
 
 int main()

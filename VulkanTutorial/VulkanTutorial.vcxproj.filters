@@ -27,7 +27,13 @@
     <ClCompile Include="main_vulkan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DebugAndValidationLayer.cpp">
+    <ClCompile Include="Debug&amp;ValidationLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Surface&amp;PresentationQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

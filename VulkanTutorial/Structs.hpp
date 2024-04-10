@@ -3,15 +3,15 @@
 
 struct QueueFamilyIndices
 {
-    std::optional<uint32_t> graphicsFamily;
-    std::optional<uint32_t> presentFamily;
+    std::optional<uint32_t> graphicsFamily;//queue family support graphics or not
+    std::optional<uint32_t> presentFamily;//queue family support present or not
     bool isComplete()
     {
         return graphicsFamily.has_value() && presentFamily.has_value();
     }
 };
 
-static QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device)
+static QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice &device, VkSurfaceKHR& surface)
 {
     //get all available queue family on the physical device
     uint32_t queueFamilyCount = 0;
@@ -24,11 +24,24 @@ static QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device)
     int index = 0;
     for (const auto& queueFamily : queueFamilies)//find queuefamily that support vk_queue_graphics_bit
     {
-        if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+        if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)//check graphics family
         {
             indices.graphicsFamily = index;
+        }
+
+        //check present family
+        VkBool32 presentSupport = false;
+        vkGetPhysicalDeviceSurfaceSupportKHR(device, index, surface, &presentSupport);
+        if (queueFamily.queueCount > 0 && presentSupport)
+        {
+            indices.presentFamily = index;
+        }
+
+        if (indices.isComplete())
+        {
             break;
         }
+
         ++index;
     }
     return indices;

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <vector>
+#include <set>
 
 #include <optional>
 
@@ -51,12 +52,32 @@ void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& create
 
 #pragma region PhysicalDevices and FamilyQueue
 
-VkPhysicalDevice PickPhysicalDevice(VkInstance& instance);
-bool isDeviceSuitable(VkPhysicalDevice device);
+VkPhysicalDevice PickPhysicalDevice(VkInstance& instance, VkSurfaceKHR& surface);
+bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR &surface);
 
 #pragma endregion
 
 #pragma region LogicalDevices and Queue
 void CreateLogicalDevice(VkPhysicalDevice& physicalDevice, VkDevice* device, VkQueue* graphicsQueue);
+
+#pragma endregion
+
+#pragma region Surface & SwapChain
+void CreateSurface(VkInstance& instance, GLFWwindow* window, VkSurfaceKHR* surface);
+
+const std::vector<const char*> deviceExtensions =
+{
+    VK_KHR_SWAPCHAIN_EXTENSION_NAME
+};
+
+
+struct SwapChainSupportDetails//properties should check
+{
+    VkSurfaceCapabilitiesKHR capabilities;
+    std::vector<VkSurfaceFormatKHR> formats;
+    std::vector<VkPresentModeKHR> presentModes;
+};
+
+SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice& device, VkSurfaceKHR& surface);
 
 #pragma endregion
