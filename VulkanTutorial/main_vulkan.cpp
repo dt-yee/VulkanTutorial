@@ -28,8 +28,11 @@ private:
         createInstance();
 
         CreateSurface(instance, windows, &surface);
-        physicalDevice = PickPhysicalDevice(instance);
+        physicalDevice = PickPhysicalDevice(instance, surface);
         CreateLogicalDevice(physicalDevice, &logicalDevice, &graphicQueue);
+
+        swapChain = CreateSwapchain(windows, logicalDevice, physicalDevice, surface, &swapChainImageFormat, &swapChainExtent, swapChainImages);
+        swapChainImageViews = CreateImageViews(logicalDevice, swapChainImages, swapChainImageFormat);
     }
 
     void mainLoop()
@@ -46,6 +49,13 @@ private:
         {
             delete(DebugValidationLayer);
         }
+
+        for (auto imageView : swapChainImageViews)
+        {
+            vkDestroyImageView(logicalDevice, imageView, nullptr);
+        }
+
+        vkDestroySwapchainKHR(logicalDevice, *swapChain, nullptr);
 
         vkDestroyInstance(instance, nullptr);
 
@@ -141,6 +151,12 @@ private:
     VkQueue presentQueue = VK_NULL_HANDLE;
 
     VkSurfaceKHR surface = VK_NULL_HANDLE;
+
+    VkSwapchainKHR *swapChain = VK_NULL_HANDLE;
+    std::vector<VkImage> swapChainImages;
+    VkFormat swapChainImageFormat;
+    VkExtent2D swapChainExtent;
+    std::vector<VkImageView> swapChainImageViews;
 };
 
 int main()

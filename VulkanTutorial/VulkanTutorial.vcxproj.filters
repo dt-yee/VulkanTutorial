@@ -33,7 +33,7 @@
     <ClCompile Include="LogicalDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Surface&amp;PresentationQueue.cpp">
+    <ClCompile Include="Surface&amp;SwapChain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

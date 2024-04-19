@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <vector>
 #include <set>
-
+#include <algorithm>
 #include <optional>
 
 const uint32_t WIDTH = 800;
@@ -58,8 +58,7 @@ bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR &surface);
 #pragma endregion
 
 #pragma region LogicalDevices and Queue
-void CreateLogicalDevice(VkPhysicalDevice& physicalDevice, VkDevice* device, VkQueue* graphicsQueue);
-
+void CreateLogicalDevice(VkPhysicalDevice& physicalDevice, VkDevice* device, VkQueue* graphicsQueue, VkQueue* presentQueue, VkSurfaceKHR& surface);
 #pragma endregion
 
 #pragma region Surface & SwapChain
@@ -79,5 +78,15 @@ struct SwapChainSupportDetails//properties should check
 };
 
 SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice& device, VkSurfaceKHR& surface);
+
+VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+
+VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+
+VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, GLFWwindow* window);
+
+VkSwapchainKHR* CreateSwapchain(GLFWwindow* window, VkDevice& device, VkPhysicalDevice& physicalDevice, VkSurfaceKHR& surface, VkFormat* swapChainImageFormat, VkExtent2D* swapChainExtent, std::vector<VkImage>& swapChainImages);
+
+std::vector<VkImageView> CreateImageViews(VkDevice& device, std::vector<VkImage>& swapChainImages, VkFormat swapChainImageFormat);
 
 #pragma endregion

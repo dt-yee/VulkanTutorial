@@ -34,7 +34,7 @@ bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR& surface)
     //VkPhysicalDeviceFeatures deviceFeatures;//gpu features: compression, 64bit float, mrt
     //vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
 
-    QueueFamilyIndices indices = FindQueueFamilies(device, surface);
+    QueueFamilyIndices indices = FindQueueFamilies(device,  surface);
 
     bool extensionSupported = checkDeviceExtensionSupport(device);
 

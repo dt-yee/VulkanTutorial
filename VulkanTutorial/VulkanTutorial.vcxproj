@@ -153,7 +153,7 @@
     <ClCompile Include="main_test.cpp" />
     <ClCompile Include="main_vulkan.cpp" />
     <ClCompile Include="PhysicalDevice&amp;Queue.cpp" />
-    <ClCompile Include="Surface&amp;PresentationQueue.cpp" />
+    <ClCompile Include="Surface&amp;SwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonHead.h" />
